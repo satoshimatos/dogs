@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<script src='scripts/main.js'></script>
+
+<header>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BhuTuka+Expanded+One&family=Hubballi&family=League+Gothic&family=Open+Sans:wght@300&family=Smooch+Sans:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/style.css">
+</header>
+
+<body id="body">
+    <h2>Satoshi Dogs</h2>
+    <form id="dogs">
+        <div>
+            <label for="dogs">Choose a dog breed:</label>
+            <select name="dogsList" id="dogsList">
+                <?php
+                require(__DIR__ . '/../srv/src/Service/DogsGetList.php');
+                foreach ($dogsList as $dog) {
+                    echo '<option value="' . $dog . '">' . ucfirst($dog) . '</option>';
+                }
+                ?>
+            </select>
+        </div>
+        <br>
+        <div>
+            Search by name: <input type="input" name="getByBreed" id="breedName" class="breedName">
+            <button type="submit" name="search" id="search">Search</button>
+        </div>
+        <br>
+        <div>
+            <?php
+            require(__DIR__ . '/../srv/src/Service/DogsGetImage.php');
+            echo $img ?? '';
+            ?>
+        </div>
+        <br>
+        <div>
+            <label for="fontsColor">Choose a color for the text:</label>
+            <select name="fontsColor" id="fontColor" onchange="changeColor()">
+                <option value="black">Black</option>
+                <option value="green">Green</option>
+                <option value="purple">Purple</option>
+                <option value="blue">Blue</option>
+                <option value="red">Red</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <label for="fontsStyle">Choose a font style for the text:</label>
+            <select name="fontsStyle" id="fontStyle" onchange="changeFontStyle()">
+                <option value="Smooch Sans">Smooch Sans</option>
+                <option value="BhuTuka Expanded One">BhuTuka Expanded One</option>
+                <option value="Hubballi">Hubballi</option>
+                <option value="League Gothic">League Gothic</option>
+                <option value="Open Sans">Open Sans</option>
+            </select>
+        </div>
+    </form>
+    <div id="cache">
+        <button name="save" id="saveCache" onclick="saveState()">Save state</button>
+    </div>
+</body>
+
+</html>
